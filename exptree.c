@@ -56,28 +56,28 @@ Exptree *exptree_generate_from_rpn(Token *arr_token, int size)
 	}
 
 	for (int i = 2; i < size; i++) {
-		//Exptree *tmp_left = NULL;
-		//Exptree *tmp_right = NULL;
+		Exptree *tmp_left = NULL;
+		Exptree *tmp_right = NULL;
 
 		if (token_is_operator(arr_token, i)) {
-			Exptree *tmp = exptree_create((arr_token + i), NULL, NULL);
-			token_hrefs[i] = tmp;
-			root = tmp;
-
 			int pos = i - 1;
 			if (token_hrefs[pos] != NULL) {
-				tmp->right = token_hrefs[pos];
+				tmp_right = token_hrefs[pos];
 				pos -= 3;
 			} else {
-				tmp->right = exptree_create((arr_token + pos), NULL, NULL);
+				tmp_right = exptree_create((arr_token + pos), NULL, NULL);
 				pos--;
 			}
 
 			if (token_hrefs[pos] != NULL) {
-				tmp->left = token_hrefs[pos];
+				tmp_left = token_hrefs[pos];
 			} else {
-				tmp->left = exptree_create((arr_token + pos), NULL, NULL);
+				tmp_left = exptree_create((arr_token + pos), NULL, NULL);
 			}
+
+			Exptree *tmp = exptree_create((arr_token + i), tmp_left, tmp_right);
+			token_hrefs[i] = tmp;
+			root = tmp;
 		}
 	}
 	return root;
