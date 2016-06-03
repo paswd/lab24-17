@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -f lab24 ]
+	then
+	rm lab24
+fi
+make lib
+gcc main.c -L. lib/libexptree.a lib/libqueue.a -o lab24
+./lab24

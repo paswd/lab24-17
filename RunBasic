@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -f lab24 ]
+	then
+	rm lab24
+fi
+make
+./lab24
