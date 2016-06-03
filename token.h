@@ -12,6 +12,7 @@ typedef struct _token Token;
 Token *token_copy(Token *token);
 void stack_print_chars(Stack *stack);
 Token *convert_string_to_tokens(char *str, int *length);
+void token_create(Token **token, Item value, bool is_operator, bool is_numeral);
 void token_destroy(Token **arr);
 void token_arr_print(Token *arr, int size);
 Item token_getvalue(Token *arr, int pos);

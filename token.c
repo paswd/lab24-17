@@ -39,12 +39,13 @@ Token *convert_string_to_tokens(char *str, int *length)
 	//printf("Function enter\n");
 	int size = strlen(str);
 	printf("%d\n", size);
-	Token *token_arr = (Token *) calloc(size, sizeof(Token));
+	Token *token_arr = (Token *) calloc(size * 2, sizeof(Token));
 	for (int i = 0; i < size; i++)
 		token_arr[i].value = 0;
 
 	int pos = 0;
-	bool is_operand_passed = false;;
+	bool is_operand_passed = false;
+	int prev = 0;
 	for (int i = 0; i < size; i++) {
 		if (str[i] == ' ')
 			continue;
@@ -68,6 +69,13 @@ Token *convert_string_to_tokens(char *str, int *length)
 			pos++;
 			is_operand_passed = false;
 		}
+		if ((prev == 0 || prev == '(') && str[i] == '-') {
+			token_arr[pos].value = 0;
+			token_arr[pos].is_numeral = true;
+			token_arr[pos].is_operator = false;
+			pos++;
+		}
+
 		token_arr[pos].is_numeral = false;
 		token_arr[pos].is_operator = true;
 		token_arr[pos].value = str[i];
@@ -80,10 +88,20 @@ Token *convert_string_to_tokens(char *str, int *length)
 	/*if (!token_arr[pos].is_operator)
 		pos++;*/
 	//token_arr[pos - 1].is_last = true;
+	token_arr = (Token *) realloc(token_arr, pos * sizeof(Token));
 	*length = pos;
 	
 	//printf("Function out\n");
 	return token_arr;
+}
+
+void token_create(Token **token, Item value, bool is_operator, bool is_numeral)
+{
+	if (*token == NULL)
+		*token = (Token *) calloc(1, sizeof(Token));
+	(*token)->value = value;
+	(*token)->is_operator = is_operator;
+	(*token)->is_numeral = is_numeral;
 }
 
 void token_destroy(Token **arr)

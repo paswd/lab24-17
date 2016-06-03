@@ -9,7 +9,7 @@
 
 typedef struct _exptree Exptree;
 
-Exptree *exptree_create(Token *value, Exptree *left, Exptree *right, bool is_operation);
+Exptree *exptree_create(Token *token, Exptree *left, Exptree *right);
 void exptree_destroy(Exptree **root);
 //Exptree *exptree_generate_from_rpn(Token *arr_token, int size);
 

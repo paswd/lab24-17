@@ -3,8 +3,7 @@ FLAGS=-Wextra -Wall -Werror -pedantic -std=c99
 all: start
 
 start: basfunc.o exptree.o token.o main.o
-	#gcc $(FLAGS) -o lab24 basfunc.o exptree.o token.o main.o -L. lib/libqueue.a lib/libstack.a
-	gcc $(FLAGS) -o lab24 basfunc.o exptree.o stack.o token.o main.o
+	gcc $(FLAGS) -o lab24 basfunc.o exptree.o token.o main.o -L. lib/libqueue.a lib/libstack.a
 
 main.o: main.c
 	gcc -c $(FLAGS) main.c
