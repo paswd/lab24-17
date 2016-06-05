@@ -25,10 +25,14 @@ int main(void)
 	Token *rpn = token_convert_to_rpn(token, token_size, &rpn_size);
 	token_destroy(&token);
 
-	printf("%d\n", rpn_size);
+	//printf("%d\n", rpn_size);
 	token_arr_print(rpn, rpn_size);
 
+	Exptree *tree = exptree_generate_from_rpn(rpn, rpn_size);
+
 	token_destroy(&rpn);
+	exptree_print(tree, 0);
+	exptree_destroy(&tree);
 
 	return 0;
 }

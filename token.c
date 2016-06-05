@@ -45,6 +45,7 @@ Token *convert_string_to_tokens(char *str, int *length)
 
 	int pos = 0;
 	bool is_operand_passed = false;
+	bool set_closing = false;
 	int prev = 0;
 	for (int i = 0; i < size; i++) {
 		if (str[i] == ' ')
@@ -69,7 +70,22 @@ Token *convert_string_to_tokens(char *str, int *length)
 			pos++;
 			is_operand_passed = false;
 		}
+		if (set_closing) {
+			token_arr[pos].value = ')';
+			token_arr[pos].is_numeral = false;
+			token_arr[pos].is_operator = true;
+			set_closing = false;
+			pos++;
+		}
 		if ((prev == 0 || prev == '(') && str[i] == '-') {
+			if (prev == 0) {
+				token_arr[pos].value = '(';
+				token_arr[pos].is_numeral = false;
+				token_arr[pos].is_operator = true;
+				set_closing = true;
+				pos++;
+			}
+
 			token_arr[pos].value = 0;
 			token_arr[pos].is_numeral = true;
 			token_arr[pos].is_operator = false;
@@ -122,6 +138,10 @@ void token_arr_print(Token *arr, int size)
 Item token_getvalue(Token *arr, int pos)
 {
 	return (arr + pos)->value;
+}
+Token *token_get_by_position(Token *arr, int pos)
+{
+	return arr + pos;
 }
 
 void token_print_value(Token *arr, int pos)

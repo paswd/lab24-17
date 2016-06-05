@@ -16,6 +16,7 @@ void token_create(Token **token, Item value, bool is_operator, bool is_numeral);
 void token_destroy(Token **arr);
 void token_arr_print(Token *arr, int size);
 Item token_getvalue(Token *arr, int pos);
+Token *token_get_by_position(Token *arr, int pos);
 void token_print_value(Token *arr, int pos);
 Token *token_convert_to_rpn(Token *arr, int size, int *new_size);
 bool token_is_operator(Token *arr, int num);

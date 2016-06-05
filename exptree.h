@@ -11,6 +11,7 @@ typedef struct _exptree Exptree;
 
 Exptree *exptree_create(Token *token, Exptree *left, Exptree *right);
 void exptree_destroy(Exptree **root);
-//Exptree *exptree_generate_from_rpn(Token *arr_token, int size);
+Exptree *exptree_generate_from_rpn(Token *arr_token, int size);
+void exptree_print(Exptree *root, int lvl);
 
 #endif

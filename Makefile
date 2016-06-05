@@ -21,7 +21,7 @@ token.o: token.h token.c
 	gcc -c $(FLAGS) token.h token.c
 
 
-clean:
+clear:
 	-rm -f *.o *.gch lab24
 
 lib: exptree.o
